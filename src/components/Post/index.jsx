@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getDataProfile } from "../../services/PostService";
+import FacebookVideo from "../Video";
 
 const posts = [
     {
@@ -80,7 +81,7 @@ export default function Post() {
         // Configura el timer para hacer la consulta cada 1 hora (en milisegundos)
         const intervalId = setInterval(() => {
             obtenerData(); // Realiza la consulta cada 1 hora
-        }, 60 * 60 * 1000); // 1 hora = 60 * 60 * 1000 milisegundos
+        }, 60 *60* 1000); // 1 hora = 60 * 60 * 1000 milisegundos
 
         // Limpia el intervalo cuando el componente se desmonta
         return () => clearInterval(intervalId);
@@ -101,13 +102,14 @@ export default function Post() {
                     <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                         {profileData.posts.data.map((post) => (
                             <article key={post.id} className="flex max-w-xl flex-col items-start justify-between">
-                                {/* Imagen del post */}
-                                <img src={post.full_picture} alt='' className="w-full h-48 object-cover rounded-lg" />
+                                
                                 {(!post.video_buying_eligibility || post.video_buying_eligibility.lenght === 0) ? (
-                                    <div class="fb-video" data-href={post.link} 
-                                    data-allowfullscreen="true" data-width="500"></div>
+                                    // <div class="fb-video" data-href={post.link} 
+                                    // data-allowfullscreen="true" data-width="500"></div>
+                                    <FacebookVideo link= {post.link}></FacebookVideo>
                                 ) : (
-                                    <></>
+                                    <>{/* Imagen del post */}
+                                <img src={post.full_picture} alt='' className="w-full h-48 object-cover rounded-lg" /></>
                                 )
                                 }
                                 <div className="flex items-center gap-x-4 text-xs mt-4">
@@ -151,5 +153,5 @@ export default function Post() {
 
             </div>
         </div>
-    );
+    );   
 }

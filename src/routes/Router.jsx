@@ -4,6 +4,7 @@ import App from '../App'
 import Home from '../components/Home'
 import NotFound from '../components/NotFound'
 import Post from '../components/Post'
+import FacebookVideo from '../components/Video'
 
 
 const router = createBrowserRouter([
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
                 path: "*",
                 element: <NotFound></NotFound>,
             },
+            {
+                path: "video",
+                element: <FacebookVideo></FacebookVideo>
+            }
         ]
     }
 ])
